@@ -1,4 +1,3 @@
-import { Notification } from 'components/Notification/Notification';
 import { Item } from './Statistics.styled';
 
 export const Statistics = ({ stats, total, positivePercentage }) => {
@@ -11,17 +10,11 @@ export const Statistics = ({ stats, total, positivePercentage }) => {
 
   return (
     <>
-      {total ? (
-        <>
-          <ul>{statisticsList}</ul>
-          <div>
-            <p>Total: {total}</p>
-            <p>Positive feedback: {positivePercentage}%</p>
-          </div>
-        </>
-      ) : (
-        <Notification message="There is no feedback"></Notification>
-      )}
+      <ul>{statisticsList}</ul>
+      <div>
+        <p>Total: {total}</p>
+        <p>Positive feedback: {positivePercentage}%</p>
+      </div>
     </>
   );
 };

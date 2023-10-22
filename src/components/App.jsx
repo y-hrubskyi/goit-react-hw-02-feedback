@@ -3,18 +3,13 @@ import { Component } from 'react';
 import { Section } from './Section/Section';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './Statistics/Statistics';
+import { Notification } from './Notification/Notification';
 
 import { GlobalStyle } from './GlobalStyle';
 import { AppWrapper } from './App.styled';
 
-const INITIAL_STATE = {
-  good: 0,
-  neutral: 0,
-  bad: 0,
-};
-
 export class App extends Component {
-  state = { ...INITIAL_STATE };
+  state = { good: 0, neutral: 0, bad: 0 };
 
   countTotalFeedback = () => {
     const values = Object.values(this.state);
@@ -28,13 +23,13 @@ export class App extends Component {
     return ((good * 100) / total).toFixed(0);
   };
 
-  handleClick = e => {
-    const { name } = e.target;
-    this.setState(prevState => ({ [name]: prevState[name] + 1 }));
+  handleClick = key => {
+    this.setState(prevState => ({ [key]: prevState[key] + 1 }));
   };
 
   render() {
     const { state } = this;
+    const total = this.countTotalFeedback();
 
     return (
       <AppWrapper>
@@ -47,11 +42,15 @@ export class App extends Component {
           />
         </Section>
         <Section title="Statistics">
-          <Statistics
-            stats={state}
-            total={this.countTotalFeedback()}
-            positivePercentage={this.countPositiveFeedbackPercentage()}
-          />
+          {total ? (
+            <Statistics
+              stats={state}
+              total={total}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification message="There is no feedback"></Notification>
+          )}
         </Section>
       </AppWrapper>
     );
