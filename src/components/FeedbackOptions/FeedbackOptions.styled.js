@@ -4,22 +4,23 @@ export const ButtonsList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: ${p => p.theme.spacing(5)};
+  margin-bottom: ${p => p.theme.spacing(5)};
 `;
 
 export const Button = styled.button`
-  padding: 4px 12px;
+  padding: ${p => p.theme.spacing(1)} ${p => p.theme.spacing(3)};
 
   text-transform: capitalize;
 
   background-color: transparent;
-  border-radius: 8px;
+  border-radius: ${p => p.theme.radii.md};
 
-  transition: color 250ms linear, background-color 250ms linear;
+  transition: ${p => p.theme.transition('color')},
+    ${p => p.theme.transition('background-color')};
 
   &:hover {
-    background-color: blue;
-    color: white;
+    background-color: ${p => p.theme.colors.blue};
+    color: ${p => p.theme.colors.white};
   }
 `;
